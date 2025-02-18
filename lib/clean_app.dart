@@ -1,3 +1,4 @@
+import 'package:clean_architecture_flutter/core/theming/app_theme.dart';
 import 'package:flutter/material.dart';
 
 class CleanApp extends StatelessWidget {
@@ -5,8 +6,9 @@ class CleanApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
+    return MaterialApp(
+      theme: appTheme,
+      home: const Scaffold(
         body: Center(
           child: Text('adf'),
         ),
