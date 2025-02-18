@@ -1,4 +1,5 @@
 import 'package:clean_architecture_flutter/core/strings/failures.dart';
+import 'package:clean_architecture_flutter/core/strings/messages.dart';
 import 'package:clean_architecture_flutter/features/posts/domain/entities/post.dart';
 import 'package:clean_architecture_flutter/features/posts/domain/usecases/add_post.dart';
 import 'package:clean_architecture_flutter/features/posts/domain/usecases/delete_post.dart';
@@ -21,21 +22,21 @@ class PostsCubit extends Cubit<PostsState> {
 
   Future<void> addNewPost(Post post) async {
     emit(LoadingPostsState());
-    final failureOrDoneMessage = await addPost(post);
+    final failureOrDoneMessage = await addPost.addPost(post);
     emit(_eitherDoneMessageOrErrorState(
         failureOrDoneMessage, ADD_SUCCESS_MESSAGE));
   }
 
   Future<void> updateExistingPost(Post post) async {
     emit(LoadingPostsState());
-    final failureOrDoneMessage = await updatePost(post);
+    final failureOrDoneMessage = await updatePost.updatePost(post);
     emit(_eitherDoneMessageOrErrorState(
         failureOrDoneMessage, UPDATE_SUCCESS_MESSAGE));
   }
 
   Future<void> removePost(int postId) async {
     emit(LoadingPostsState());
-    final failureOrDoneMessage = await deletePost(postId);
+    final failureOrDoneMessage = await deletePost.deletePost(postId);
     emit(_eitherDoneMessageOrErrorState(
         failureOrDoneMessage, DELETE_SUCCESS_MESSAGE));
   }
@@ -50,9 +51,9 @@ class PostsCubit extends Cubit<PostsState> {
 
   String _mapFailureToMessage(Failure failure) {
     switch (failure.runtimeType) {
-      case ServerFailure:
+      case const (ServerFailure):
         return SERVER_FAILURE_MESSAGE;
-      case OfflineFailure:
+      case const (OfflineFailure):
         return OFFLINE_FAILURE_MESSAGE;
       default:
         return "Unexpected error, please try again later.";
