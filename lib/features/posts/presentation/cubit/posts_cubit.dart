@@ -1,21 +1,23 @@
+import 'package:clean_architecture_flutter/core/strings/failures.dart';
+import 'package:clean_architecture_flutter/features/posts/domain/entities/post.dart';
+import 'package:clean_architecture_flutter/features/posts/domain/usecases/add_post.dart';
+import 'package:clean_architecture_flutter/features/posts/domain/usecases/delete_post.dart';
+import 'package:clean_architecture_flutter/features/posts/domain/usecases/update_post.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dartz/dartz.dart';
 import '../../../../../core/error/failures.dart';
-import '../../domain/usecases/add_post_usecase.dart';
-import '../../domain/usecases/delete_post_usecase.dart';
-import '../../domain/usecases/update_post_usecase.dart';
 import 'posts_state.dart';
 
 class PostsCubit extends Cubit<PostsState> {
-  final AddPostUsecase addPost;
-  final DeletePostUsecase deletePost;
-  final UpdatePostUsecase updatePost;
+  final AddPost addPost;
+  final DeletePost deletePost;
+  final UpdatePost updatePost;
 
   PostsCubit({
     required this.addPost,
     required this.deletePost,
     required this.updatePost,
-  }) : super(PostsInitial());
+  }) : super(PostInitial());
 
   Future<void> addNewPost(Post post) async {
     emit(LoadingPostsState());
