@@ -1,14 +1,14 @@
 import 'package:clean_architecture_flutter/features/posts/domain/entities/post.dart';
 import 'package:equatable/equatable.dart';
 
-abstract class AddDeleteUpdatePostEvent extends Equatable {
-  const AddDeleteUpdatePostEvent();
+abstract class PostsEvent extends Equatable {
+  const PostsEvent();
 
   @override
   List<Object> get props => [];
 }
 
-class AddPostEvent extends AddDeleteUpdatePostEvent {
+class AddPostEvent extends PostsEvent {
   final Post post;
 
   const AddPostEvent({required this.post});
@@ -17,7 +17,7 @@ class AddPostEvent extends AddDeleteUpdatePostEvent {
   List<Object> get props => [post];
 }
 
-class UpdatePostEvent extends AddDeleteUpdatePostEvent {
+class UpdatePostEvent extends PostsEvent {
   final Post post;
 
   const UpdatePostEvent({required this.post});
@@ -26,7 +26,7 @@ class UpdatePostEvent extends AddDeleteUpdatePostEvent {
   List<Object> get props => [post];
 }
 
-class DeletePostEvent extends AddDeleteUpdatePostEvent {
+class DeletePostEvent extends PostsEvent {
   final int postId;
 
   const DeletePostEvent({required this.postId});
