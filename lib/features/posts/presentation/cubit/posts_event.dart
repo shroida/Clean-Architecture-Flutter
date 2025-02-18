@@ -11,7 +11,7 @@ abstract class AddDeleteUpdatePostEvent extends Equatable {
 class AddPostEvent extends AddDeleteUpdatePostEvent {
   final Post post;
 
-  AddPostEvent({required this.post});
+  const AddPostEvent({required this.post});
 
   @override
   List<Object> get props => [post];
@@ -20,7 +20,7 @@ class AddPostEvent extends AddDeleteUpdatePostEvent {
 class UpdatePostEvent extends AddDeleteUpdatePostEvent {
   final Post post;
 
-  UpdatePostEvent({required this.post});
+  const UpdatePostEvent({required this.post});
 
   @override
   List<Object> get props => [post];
@@ -29,7 +29,7 @@ class UpdatePostEvent extends AddDeleteUpdatePostEvent {
 class DeletePostEvent extends AddDeleteUpdatePostEvent {
   final int postId;
 
-  DeletePostEvent({required this.postId});
+  const DeletePostEvent({required this.postId});
 
   @override
   List<Object> get props => [postId];
