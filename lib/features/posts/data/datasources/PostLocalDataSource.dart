@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:clean_architecture_flutter/core/error/failures.dart';
+import 'package:clean_architecture_flutter/core/error/exeptions.dart';
 import 'package:dartz/dartz.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -36,7 +36,7 @@ class PostLocalDataSourceImpl implements PostLocalDataSource {
           .toList();
       return Future.value(jsonToPostModels);
     } else {
-      throw EmptyCacheException();
+      throw EmptyCacheExeption();
     }
   }
 }
