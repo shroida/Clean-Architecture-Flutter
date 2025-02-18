@@ -18,7 +18,11 @@ class PostRepoImpl extends PostRepo {
   Future<Either<Failure, Unit>> deletePost(int id) {}
 
   @override
-  Future<Either<Failure, List<Post>>> getAllPosts() {}
+  Future<Either<Failure, List<Post>>> getAllPosts() async {
+    await postRemoteDataSource.getAllPosts();
+    await postLocalDataSource.getCachedPosts();
+    throw UnimplementedError();
+  }
 
   @override
   Future<Either<Failure, Unit>> updatePost(Post id) {}
