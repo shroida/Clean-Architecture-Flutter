@@ -8,3 +8,17 @@ abstract class PostRemoteDataSource {
   Future<Unit> addPost(Post post);
   Future<Unit> updatePosts(Post post);
 }
+
+class RemotePostDataSource implements PostRemoteDataSource {
+  @override
+  Future<Unit> addPost(Post post) {}
+
+  @override
+  Future<Unit> deletePost(int postId) {}
+
+  @override
+  Future<List<PostModel>> getAllPosts() {}
+
+  @override
+  Future<Unit> updatePosts(Post post) {}
+}
