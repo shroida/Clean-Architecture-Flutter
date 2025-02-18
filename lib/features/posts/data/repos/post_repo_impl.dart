@@ -1,14 +1,14 @@
 import 'package:clean_architecture_flutter/core/error/exeptions.dart';
 import 'package:clean_architecture_flutter/core/error/failures.dart';
 import 'package:clean_architecture_flutter/core/networking/network_info.dart';
-import 'package:clean_architecture_flutter/features/posts/data/datasources/PostLocalDataSource.dart';
+import 'package:clean_architecture_flutter/features/posts/data/datasources/post_local_data_source.dart';
 import 'package:clean_architecture_flutter/features/posts/data/datasources/post_remote_data_source.dart';
 import 'package:clean_architecture_flutter/features/posts/data/models/post_model.dart';
 import 'package:clean_architecture_flutter/features/posts/domain/entities/post.dart';
 import 'package:clean_architecture_flutter/features/posts/domain/repos/post_repo.dart';
 import 'package:dartz/dartz.dart';
 
-typedef Future<Unit> DeleteOrUpdateOrAddPost();
+typedef DeleteOrUpdateOrAddPost = Future<Unit> Function();
 
 class PostRepoImpl extends PostRepo {
   final PostRemoteDataSource remoteDataSource;
@@ -51,9 +51,9 @@ class PostRepoImpl extends PostRepo {
   }
 
   @override
-  Future<Either<Failure, Unit>> deletePost(int postId) async {
+  Future<Either<Failure, Unit>> deletePost(int id) async {
     return await _getMessage(() {
-      return remoteDataSource.deletePost(postId);
+      return remoteDataSource.deletePost(id);
     });
   }
 
