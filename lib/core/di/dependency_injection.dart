@@ -10,6 +10,7 @@ import 'package:clean_architecture_flutter/features/posts/domain/usecases/delete
 import 'package:clean_architecture_flutter/features/posts/domain/usecases/get_all_posts.dart';
 import 'package:clean_architecture_flutter/features/posts/domain/usecases/update_post.dart';
 import 'package:http/http.dart' as http;
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 final sl = GetIt.instance;
@@ -40,6 +41,9 @@ Future<void> init() async {
   sl.registerFactory(() => PostsCubit(
       addPost: sl(), deletePost: sl(), updatePost: sl(), getAllPosts: sl()));
 
+  sl.registerLazySingleton(() => InternetConnectionChecker.createInstance());
+
+// Register NetworkInfo
   sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()));
   //! External
   // SharedPreferences

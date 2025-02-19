@@ -7,8 +7,19 @@ import 'package:clean_architecture_flutter/features/posts/presentation/widgets/p
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class PostPage extends StatelessWidget {
+class PostPage extends StatefulWidget {
   const PostPage({super.key});
+
+  @override
+  State<PostPage> createState() => _PostPageState();
+}
+
+class _PostPageState extends State<PostPage> {
+  @override
+  void initState() {
+    super.initState();
+    BlocProvider.of<PostsCubit>(context).fetchAllPosts();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +28,7 @@ class PostPage extends StatelessWidget {
         backgroundColor: Colors.deepPurple[50],
         body: BlocBuilder<PostsCubit, PostsState>(builder: (context, state) {
           if (state is LoadingPostsState) {
-            const LoadingWidget();
+            return const LoadingWidget();
           } else if (state is LoadedPostsState) {
             return RefreshIndicator(
                 onRefresh: () => _onRefresh(context),
