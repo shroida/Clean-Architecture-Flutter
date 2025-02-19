@@ -37,8 +37,8 @@ Future<void> init() async {
     () => PostLocalDataSourceImpl(sharedPreferences: sl()),
   );
   // Register Cubit
-  sl.registerFactory(
-      () => PostsCubit(addPost: sl(), deletePost: sl(), updatePost: sl()));
+  sl.registerFactory(() => PostsCubit(
+      addPost: sl(), deletePost: sl(), updatePost: sl(), getAllPosts: sl()));
 
   sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()));
   //! External

@@ -4,6 +4,7 @@ import 'package:clean_architecture_flutter/features/posts/domain/entities/post.d
 import 'package:clean_architecture_flutter/features/posts/domain/usecases/add_post.dart';
 import 'package:clean_architecture_flutter/features/posts/domain/usecases/delete_post.dart';
 import 'package:clean_architecture_flutter/features/posts/domain/usecases/update_post.dart';
+import 'package:clean_architecture_flutter/features/posts/domain/usecases/get_all_posts.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dartz/dartz.dart';
 import '../../../../../core/error/failures.dart';
@@ -13,11 +14,13 @@ class PostsCubit extends Cubit<PostsState> {
   final AddPost addPost;
   final DeletePost deletePost;
   final UpdatePost updatePost;
+  final GetAllPosts getAllPosts;
 
   PostsCubit({
     required this.addPost,
     required this.deletePost,
     required this.updatePost,
+    required this.getAllPosts,
   }) : super(PostInitial());
 
   Future<void> addNewPost(Post post) async {
@@ -41,6 +44,12 @@ class PostsCubit extends Cubit<PostsState> {
         failureOrDoneMessage, DELETE_SUCCESS_MESSAGE));
   }
 
+  Future<void> fetchAllPosts() async {
+    emit(LoadingPostsState());
+    final failureOrPosts = await getAllPosts.getAllPosts();
+    emit(_mapFailureOrPostsToState(failureOrPosts));
+  }
+
   PostsState _eitherDoneMessageOrErrorState(
       Either<Failure, Unit> either, String message) {
     return either.fold(
@@ -49,11 +58,18 @@ class PostsCubit extends Cubit<PostsState> {
     );
   }
 
+  PostsState _mapFailureOrPostsToState(Either<Failure, List<Post>> either) {
+    return either.fold(
+      (failure) => ErrorPostsState(message: _mapFailureToMessage(failure)),
+      (posts) => LoadedPostsState(posts: posts),
+    );
+  }
+
   String _mapFailureToMessage(Failure failure) {
     switch (failure.runtimeType) {
-      case const (ServerFailure):
+      case ServerFailure _:
         return SERVER_FAILURE_MESSAGE;
-      case const (OfflineFailure):
+      case OfflineFailure _:
         return OFFLINE_FAILURE_MESSAGE;
       default:
         return "Unexpected error, please try again later.";

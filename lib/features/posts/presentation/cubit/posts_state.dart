@@ -1,3 +1,4 @@
+import 'package:clean_architecture_flutter/features/posts/domain/entities/post.dart';
 import 'package:equatable/equatable.dart';
 
 abstract class PostsState extends Equatable {
@@ -18,6 +19,15 @@ class ErrorPostsState extends PostsState {
 
   @override
   List<Object> get props => [message];
+}
+
+class LoadedPostsState extends PostsState {
+  final List<Post> posts;
+
+  const LoadedPostsState({required this.posts});
+
+  @override
+  List<Object> get props => [posts];
 }
 
 class MessagePostsState extends PostsState {
