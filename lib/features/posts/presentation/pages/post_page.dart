@@ -1,3 +1,4 @@
+import 'package:clean_architecture_flutter/features/posts/presentation/widgets/app_bar_widget.dart';
 import 'package:flutter/material.dart';
 
 class PostPage extends StatelessWidget {
@@ -24,12 +25,7 @@ class PostPage extends StatelessWidget {
     ];
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Posts',
-            style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
-        backgroundColor: Colors.deepPurpleAccent,
-        elevation: 0,
-      ),
+      appBar: const AppBarWidget(),
       backgroundColor: Colors.deepPurple[50],
       body: ListView.builder(
         padding: const EdgeInsets.all(15),
