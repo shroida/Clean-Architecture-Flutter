@@ -1,5 +1,6 @@
-import 'package:clean_architecture_flutter/features/posts/presentation/pages/body_post.dart';
-import 'package:clean_architecture_flutter/features/posts/presentation/pages/title_post.dart';
+import 'package:clean_architecture_flutter/features/posts/presentation/widgets/body_post.dart';
+import 'package:clean_architecture_flutter/features/posts/presentation/widgets/id_post.dart';
+import 'package:clean_architecture_flutter/features/posts/presentation/widgets/title_post.dart';
 import 'package:clean_architecture_flutter/features/posts/presentation/widgets/app_bar_widget.dart';
 import 'package:flutter/material.dart';
 
