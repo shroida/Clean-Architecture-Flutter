@@ -1,6 +1,11 @@
+import 'package:clean_architecture_flutter/core/theming/app_theme.dart';
+import 'package:clean_architecture_flutter/features/posts/presentation/cubit/posts_cubit.dart';
+import 'package:clean_architecture_flutter/features/posts/presentation/cubit/posts_state.dart';
 import 'package:clean_architecture_flutter/features/posts/presentation/widgets/app_bar_widget.dart';
 import 'package:clean_architecture_flutter/features/posts/presentation/widgets/card_post.dart';
+import 'package:clean_architecture_flutter/features/posts/presentation/widgets/loading_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class PostPage extends StatelessWidget {
   const PostPage({super.key});
@@ -26,16 +31,23 @@ class PostPage extends StatelessWidget {
     ];
 
     return Scaffold(
-      appBar: const AppBarWidget(),
-      backgroundColor: Colors.deepPurple[50],
-      body: ListView.builder(
-        padding: const EdgeInsets.all(15),
-        itemCount: posts.length,
-        itemBuilder: (context, index) {
-          final post = posts[index];
-          return CardPost(post: post);
-        },
-      ),
-    );
+        appBar: const AppBarWidget(),
+        backgroundColor: Colors.deepPurple[50],
+        body: BlocBuilder<PostsCubit, PostsState>(builder: (context, state) {
+          if (state is LoadingPostsState) {
+            LoadingWidget();
+          } else if (state is LoadedPostsState) {
+            return RefreshIndicator(
+                onRefresh: () => _onRefresh(context),
+                child: PostListWidget(posts: state.posts));
+          } else if (state is ErrorPostsState) {
+            return MessageDisplayWidget(message: state.message);
+          }
+          return LoadingWidget();
+        }));
+  }
+
+  Future<void> _onRefresh(BuildContext context) async {
+    BlocProvider.of<PostsCubit>(context).add(RefreshPostsEvent());
   }
 }
