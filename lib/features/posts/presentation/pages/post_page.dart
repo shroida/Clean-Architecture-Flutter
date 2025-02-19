@@ -49,6 +49,6 @@ class PostPage extends StatelessWidget {
   }
 
   Future<void> _onRefresh(BuildContext context) async {
-    BlocProvider.of<PostsCubit>(context).add(RefreshPostsEvent());
+    BlocProvider.of<PostsCubit>(context).refreshPosts();
   }
 }

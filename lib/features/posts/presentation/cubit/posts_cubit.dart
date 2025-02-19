@@ -58,6 +58,10 @@ class PostsCubit extends Cubit<PostsState> {
     );
   }
 
+  void refreshPosts() {
+    fetchAllPosts(); // or whatever method fetches posts again
+  }
+
   PostsState _mapFailureOrPostsToState(Either<Failure, List<Post>> either) {
     return either.fold(
       (failure) => ErrorPostsState(message: _mapFailureToMessage(failure)),
