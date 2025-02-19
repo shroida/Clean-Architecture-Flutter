@@ -1,3 +1,4 @@
+import 'package:clean_architecture_flutter/features/posts/presentation/pages/body_post.dart';
 import 'package:clean_architecture_flutter/features/posts/presentation/pages/title_post.dart';
 import 'package:clean_architecture_flutter/features/posts/presentation/widgets/app_bar_widget.dart';
 import 'package:flutter/material.dart';
@@ -47,29 +48,9 @@ class PostPage extends StatelessWidget {
                 children: [
                   TitlePost(post: post),
                   const SizedBox(height: 8),
-                  Text(
-                    post['body'],
-                    style: const TextStyle(fontSize: 16, color: Colors.black87),
-                  ),
+                  BodyPost(post: post),
                   const SizedBox(height: 15),
-                  Align(
-                    alignment: Alignment.bottomRight,
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 5, horizontal: 10),
-                      decoration: BoxDecoration(
-                        color: Colors.deepPurpleAccent,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Text(
-                        'ID: ${post['id']}',
-                        style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                  ),
+                  IDPost(post: post),
                 ],
               ),
             ),
