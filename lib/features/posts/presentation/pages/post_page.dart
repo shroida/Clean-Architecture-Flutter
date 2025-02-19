@@ -1,3 +1,4 @@
+import 'package:clean_architecture_flutter/features/posts/presentation/pages/title_post.dart';
 import 'package:clean_architecture_flutter/features/posts/presentation/widgets/app_bar_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -44,14 +45,7 @@ class PostPage extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    post['title'],
-                    style: const TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.deepPurple,
-                    ),
-                  ),
+                  TitlePost(post: post),
                   const SizedBox(height: 8),
                   Text(
                     post['body'],
