@@ -4,6 +4,7 @@ import 'package:clean_architecture_flutter/features/posts/presentation/cubit/pos
 import 'package:clean_architecture_flutter/features/posts/presentation/widgets/app_bar_widget.dart';
 import 'package:clean_architecture_flutter/features/posts/presentation/widgets/card_post.dart';
 import 'package:clean_architecture_flutter/features/posts/presentation/widgets/loading_widget.dart';
+import 'package:clean_architecture_flutter/features/posts/presentation/widgets/message_display_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -35,7 +36,7 @@ class PostPage extends StatelessWidget {
         backgroundColor: Colors.deepPurple[50],
         body: BlocBuilder<PostsCubit, PostsState>(builder: (context, state) {
           if (state is LoadingPostsState) {
-            LoadingWidget();
+            const LoadingWidget();
           } else if (state is LoadedPostsState) {
             return RefreshIndicator(
                 onRefresh: () => _onRefresh(context),
@@ -43,7 +44,7 @@ class PostPage extends StatelessWidget {
           } else if (state is ErrorPostsState) {
             return MessageDisplayWidget(message: state.message);
           }
-          return LoadingWidget();
+          return const LoadingWidget();
         }));
   }
 
