@@ -16,7 +16,9 @@ class PostRepoImpl extends PostRepo {
   final NetworkInfo networkInfo;
 
   PostRepoImpl(
-      this.remoteDataSource, this.postLocalDataSource, this.networkInfo);
+      {required this.remoteDataSource,
+      required this.postLocalDataSource,
+      required this.networkInfo});
 
   @override
   Future<Either<Failure, List<Post>>> getAllPosts() async {
