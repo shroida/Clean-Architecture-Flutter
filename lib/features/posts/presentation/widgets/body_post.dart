@@ -1,3 +1,4 @@
+import 'package:clean_architecture_flutter/features/posts/domain/entities/post.dart';
 import 'package:flutter/material.dart';
 
 class BodyPost extends StatelessWidget {
@@ -6,12 +7,12 @@ class BodyPost extends StatelessWidget {
     required this.post,
   });
 
-  final Map<String, dynamic> post;
+  final Post post;
 
   @override
   Widget build(BuildContext context) {
     return Text(
-      post['body'],
+      post.body,
       style: const TextStyle(fontSize: 16, color: Colors.black87),
     );
   }

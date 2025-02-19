@@ -1,3 +1,4 @@
+import 'package:clean_architecture_flutter/features/posts/domain/entities/post.dart';
 import 'package:flutter/material.dart';
 import 'package:clean_architecture_flutter/features/posts/presentation/widgets/body_post.dart';
 import 'package:clean_architecture_flutter/features/posts/presentation/widgets/id_post.dart';
@@ -9,7 +10,7 @@ class CardPost extends StatelessWidget {
     required this.post,
   });
 
-  final Map<String, dynamic> post;
+  final Post post;
 
   @override
   Widget build(BuildContext context) {
